@@ -109,6 +109,21 @@ try:
 except Exception:  # pragma: no cover
     _HAS_VERCEL = False
 
+try:
+    from .azuresandboxes import (
+        DEFAULT_AZURE_SANDBOX_WORKSPACE_ROOT as DEFAULT_AZURE_SANDBOX_WORKSPACE_ROOT,
+        AzureSandboxClient as AzureSandboxClient,
+        AzureSandboxClientOptions as AzureSandboxClientOptions,
+        AzureSandboxResources as AzureSandboxResources,
+        AzureSandboxSession as AzureSandboxSession,
+        AzureSandboxSessionState as AzureSandboxSessionState,
+        AzureSandboxTimeouts as AzureSandboxTimeouts,
+    )
+
+    _HAS_AZURE_SANDBOXES = True
+except Exception:  # pragma: no cover
+    _HAS_AZURE_SANDBOXES = False
+
 __all__: list[str] = []
 
 if _HAS_E2B:
@@ -205,5 +220,18 @@ if _HAS_RUNLOOP:
             "RunloopTimeouts",
             "RunloopTunnelConfig",
             "RunloopUserParameters",
+        ]
+    )
+
+if _HAS_AZURE_SANDBOXES:
+    __all__.extend(
+        [
+            "DEFAULT_AZURE_SANDBOX_WORKSPACE_ROOT",
+            "AzureSandboxResources",
+            "AzureSandboxClient",
+            "AzureSandboxClientOptions",
+            "AzureSandboxSession",
+            "AzureSandboxSessionState",
+            "AzureSandboxTimeouts",
         ]
     )
